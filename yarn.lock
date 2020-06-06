@@ -3509,11 +3509,6 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-android-sheet@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-android-sheet/-/react-native-android-sheet-0.0.0.tgz#26f9249528f744445201065cf4254870b145ebfc"
-  integrity sha512-vfKFJAuR+xj4jnjsnli3dhsVxlaFIo9D51w8/NXWHzo6rslWCxH0ozyN9jDQWbuflWbAaEeKDMGBghwG6QqaYA==
-
 react-native@^0.61.5:
   version "0.61.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.61.5.tgz#6e21acb56cbd75a3baeb1f70201a66f42600bba8"

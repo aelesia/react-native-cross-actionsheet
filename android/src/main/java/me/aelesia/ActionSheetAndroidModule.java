@@ -1,6 +1,7 @@
 package me.aelesia;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -43,7 +44,7 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
         }
 
 
-        BottomSheetDialog dialog = new BottomSheetDialog(getCurrentActivity());
+        BottomSheetDialog dialog = new BottomSheetDialog(getCurrentActivity(), R.style.BottomSheetDialog);
         dialog.setContentView(R.layout.actionsheet);
 
         if (title != null || message != null) {
@@ -62,6 +63,7 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
                 messageText.setVisibility(View.VISIBLE);
             }
         }
+
 
         dialog.setOnCancelListener(dialog1 -> {
             promise.resolve(-1);

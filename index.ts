@@ -1,3 +1,4 @@
+// @ts-ignore
 import { NativeModules } from 'react-native'
 
 const ActionSheetAndroidModule: ActionSheetAndroidModule = NativeModules.ActionSheetAndroid
@@ -25,8 +26,8 @@ export const AndroidActionSheet = new (class {
   showActionSheetWithOptions(options: ActionSheetAndroidOptions, callback: (buttonIndex: number) => void) {
     const optionsWithoutCancel = options.options.filter((it,index)=>index!==options.cancelButtonIndex)
     let destructiveButtonIndex = options.destructiveButtonIndex ?? -1
-    if (destructiveButtonIndex && options.cancelButtonIndex && destructiveButtonIndex > options.cancelButtonIndex) {
-      destructiveButtonIndex = options.cancelButtonIndex + 1
+    if (destructiveButtonIndex!=null && options.cancelButtonIndex!=null && destructiveButtonIndex > options.cancelButtonIndex) {
+      destructiveButtonIndex = destructiveButtonIndex - 1
     }
     ActionSheetAndroidModule.options(
       options.title ?? null,
