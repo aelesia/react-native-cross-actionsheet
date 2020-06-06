@@ -1,0 +1,40 @@
+{
+  "name": "react-native-android-sheet",
+  "title": "React Native Action Sheet Android",
+  "version": "0.0.1",
+  "description": "TODO",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "android",
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github_account/react-native-action-sheet-android.git",
+    "baseUrl": "https://github.com/github_account/react-native-action-sheet-android"
+  },
+  "keywords": [
+    "react-native",
+    "action sheet",
+    "android"
+  ],
+  "author": {
+    "name": "aelesia",
+    "email": "aelesia@outlook.sg"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5",
+    "typescript": "^3.9.5"
+  },
+}
