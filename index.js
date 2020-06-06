@@ -3,8 +3,26 @@ const ActionSheetAndroidModule = NativeModules.ActionSheetAndroid;
 export const AndroidActionSheet = new (class {
     showActionSheetWithOptions(options, callback) {
         var _a, _b, _c, _d;
-        ActionSheetAndroidModule.options((_a = options.title, (_a !== null && _a !== void 0 ? _a : null)), (_b = options.message, (_b !== null && _b !== void 0 ? _b : null)), options.cancelButtonIndex ? options.options[options.cancelButtonIndex] : null, options.options, (_c = options.destructiveButtonIndex, (_c !== null && _c !== void 0 ? _c : -1)), (_d = options.tintColor, (_d !== null && _d !== void 0 ? _d : '#222222'))).then(index => {
-            callback(index);
+        const optionsWithoutCancel = options.options.filter((it, index) => index !== options.cancelButtonIndex);
+        let destructiveButtonIndex = (_a = options.destructiveButtonIndex, (_a !== null && _a !== void 0 ? _a : -1));
+        if (destructiveButtonIndex && options.cancelButtonIndex && destructiveButtonIndex > options.cancelButtonIndex) {
+            destructiveButtonIndex = options.cancelButtonIndex + 1;
+        }
+        ActionSheetAndroidModule.options((_b = options.title, (_b !== null && _b !== void 0 ? _b : null)), (_c = options.message, (_c !== null && _c !== void 0 ? _c : null)), options.cancelButtonIndex != null ? options.options[options.cancelButtonIndex] : null, optionsWithoutCancel, destructiveButtonIndex, (_d = options.tintColor, (_d !== null && _d !== void 0 ? _d : '#222222'))).then(index => {
+            if (options.cancelButtonIndex != null) {
+                if (index === -1) {
+                    callback(options.cancelButtonIndex);
+                }
+                else if (index >= options.cancelButtonIndex) {
+                    callback(index + 1);
+                }
+                else {
+                    callback(index);
+                }
+            }
+            else {
+                callback(index);
+            }
         });
     }
 })();

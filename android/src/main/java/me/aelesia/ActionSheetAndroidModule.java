@@ -1,5 +1,6 @@
 package me.aelesia;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,11 +35,13 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
     public void options(String title, String message, String cancel, ReadableArray option, int destructiveIndex, String tintColor, Promise promise) {
         List<Object> messageStrList = option.toArrayList();
         List<String> strList = new ArrayList<String>();
+
         for (Object msg: messageStrList) {
             if (msg instanceof String) {
                 strList.add((String) msg);
             }
         }
+
 
         BottomSheetDialog dialog = new BottomSheetDialog(getCurrentActivity());
         dialog.setContentView(R.layout.actionsheet);
@@ -70,6 +73,22 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
             promise.resolve(position);
         });
         listView.setAdapter(adapter);
+
+        if (cancel != null) {
+            TextView cancelText = dialog.findViewById(R.id.actionsheet_cancel);
+            try {
+                cancelText.setTextColor(Color.parseColor(tintColor));
+            } catch(Exception e) {
+                cancelText.setTextColor(Color.parseColor("#222222"));
+            }
+            cancelText.setText(cancel);
+            cancelText.setVisibility(View.VISIBLE);
+            LinearLayout cancelView = (LinearLayout) dialog.findViewById(R.id.actionsheet_cancel_view);
+            cancelView.setOnClickListener(v -> {
+                dialog.dismiss();
+                promise.resolve(-1);
+            });
+        }
 
         dialog.show();
     }
