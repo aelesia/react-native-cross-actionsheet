@@ -1,8 +1,8 @@
 {
   "name": "react-native-android-sheet",
   "title": "React Native Action Sheet Android",
-  "version": "0.0.1",
-  "description": "TODO",
+  "version": "0.0.2",
+  "description": "Native Action Sheets for Android using BottomSheetDialog",
   "main": "index.js",
   "files": [
     "README.md",
@@ -19,7 +19,8 @@
   "keywords": [
     "react-native",
     "action sheet",
-    "android"
+    "android",
+    "BottomSheetDialog"
   ],
   "author": {
     "name": "aelesia",
