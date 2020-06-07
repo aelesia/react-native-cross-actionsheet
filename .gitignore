@@ -40,3 +40,8 @@ local.properties
 buck-out/
 \.buckd/
 *.keystore
+
+*.d.ts
+!.eslintrc.js
+!.prettierrc.js
+*.js

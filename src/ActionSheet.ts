@@ -12,10 +12,10 @@ export interface ActionSheetOptions {
     onPress: () => void | Promise<void>
   }[]
   cancel?:
-    | {
-        text?: string
-        onPress?: () => void | Promise<void>
-      }
+    {
+      text?: string
+      onPress?: () => void | Promise<void>
+    }
     | false
   tintColor?: string
   anchor?: number
