@@ -18,14 +18,14 @@ npm: `npm install react-native-cross-actionsheet`
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 
-ActionSheet.options({
-  options: [
-    { text: 'Create', onPress: () => console.log('create') },
-    { text: 'Update', onPress: () => console.log('update') },
-    { text: 'Delete', destructive: true, onPress: () => console.log('delete')}
-  ],
-  cancel: { onPress: () => console.log('cancel') }
-})
+    ActionSheet.options({
+      options: [
+        { text: 'Create', onPress: () => console.log('create') },
+        { text: 'Update', onPress: () => console.log('update') },
+        { text: 'Delete', destructive: true, onPress: () => console.log('delete')}
+      ],
+      cancel: { onPress: () => console.log('cancel') }
+    })
 ```
 
 ## Preview
@@ -45,12 +45,12 @@ It's recommended to use the `ActionSheet.options` API as it is cleaner, more str
 | title           | string                            | No       |           |
 | message         | string                            | No       |           |
 | options         | { text, onPress, destructable }   | Yes      |           |
-|   .text         | string                            | Yes      |           |
-|   .onPress      | () => void                        | No       |           |
-|   .destructable | boolean                           | No       | false     |
-| cancel          | false OR { text, onPress }        | Yes      |           |
-|   .text         | string                            | No       | 'Cancel'  |
-|   .onPress      | () => void                        | No       |           |
+| &nbsp;.text     | string                            | Yes      |           |
+| &nbsp;.onPress  | () => void                        | No       |           |
+| &nbsp;.destructable | boolean                       | No       | false     |
+| cancel          | { text, onPress } OR false        | Yes      |           |
+| &nbsp;.text     | string                            | No       | 'Cancel'  |
+| &nbsp;.onPress  | () => void                        | No       |           |
 | tintColor       | string (eg. '#0088FF')            | No       |           |
 | anchor (iOS)    | number                            | No       |           |
 
