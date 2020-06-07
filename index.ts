@@ -1,5 +1,5 @@
 // @ts-ignore
-import { NativeModules } from 'react-native'
+import { NativeModules, ActionSheetIOS, Platform } from 'react-native'
 
 const ActionSheetAndroidModule: ActionSheetAndroidModule = NativeModules.ActionSheetAndroid
 interface ActionSheetAndroidModule {
@@ -20,6 +20,21 @@ export interface ActionSheetAndroidOptions {
   cancelButtonIndex?: number
   destructiveButtonIndex?: number
   tintColor?: string
+}
+
+export interface ActionSheetOptions {
+  title?: string,
+  message?: string
+  options: {
+    destructive?: boolean,
+    text: string
+    onPress: ()=>void
+  }[],
+  cancel?: {
+    text?: string
+    onPress: ()=>void
+  }
+  tintColor: string
 }
 
 export const AndroidActionSheet = new (class {
@@ -51,3 +66,41 @@ export const AndroidActionSheet = new (class {
     })
   }
 })()
+
+export const ActionSheet = new (class {
+  async options(opt: ActionSheetOptions) {
+    const {options} = opt
+    if (Platform.OS === 'android') {
+      const index = await ActionSheetAndroidModule.options(
+        opt.title ?? null,
+        opt.message ?? null,
+        opt.cancel?.text ?? null,
+        opt.options.map(it=>it.text),
+        opt.options.findIndex(it=>it.destructive),
+        opt.tintColor
+      )
+      if (index === -1) {
+        if (opt.cancel) {
+          opt.cancel?.onPress()
+        } else {
+          throw Error("ActionSheet Cancelled")
+        }
+      } else {
+        opt.options[index].onPress()
+      }
+    } else {
+      await ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: [...options.map<string>(it => it.text), 'Cancel'],
+          destructiveButtonIndex: options.findIndex(it => it.destructive),
+          cancelButtonIndex: options.length
+        },
+        (buttonIndex:number) => {
+          if (buttonIndex < options.length) {
+            options[buttonIndex].onPress()
+          }
+        }
+      )
+    }
+  }
+})
