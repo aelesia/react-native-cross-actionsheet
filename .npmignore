@@ -1,4 +1,6 @@
 index.ts
+.eslintrc.js
+.prettierrc.js
 package-lock.json
 tsconfig.json
 yarn.lock
