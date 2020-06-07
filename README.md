@@ -4,15 +4,6 @@ Simple to use, cross platform ActionSheets using **Native** Android ActionSheets
 
 As it uses Native components, it can be called statically, and no JSX components or show/hide state management are required. Just import the library and you're good to go.
 
-
-** Android **
-
-<img src="https://i.imgur.com/HSPgkCw.gif"/>
-
-** iOS (uses ActionSheetIOS) **
-
-<img src="https://i.imgur.com/XJ6rgw5.gif"/>
-
 ## Quickstart
 
 yarn: `yarn add react-native-cross-actionsheet`
@@ -32,7 +23,17 @@ ActionSheet.options({
 })
 ```
 
-## Features
+## Preview
+
+**Android**
+
+<img src="https://i.imgur.com/HSPgkCw.gif"/>
+
+**iOS (uses ActionSheetIOS)**
+
+<img src="https://i.imgur.com/XJ6rgw5.gif"/>
+
+# Features
 
 - Native Android ActionSheets
 - Feature parity with iOS
@@ -41,11 +42,27 @@ ActionSheet.options({
 - Typescript support
 - Async support
 
-## Further Usage
+# Usage
+
+## ActionSheet.options
 
 It's recommended to use the `ActionSheet.options` API as it is cleaner, more straightforward to use, and allows `awaiting`.
 
-**Simple**
+| Name            | Type                              | Required | Default   |
+| ----------------| ----------------------------------| -------- | --------- |
+| title           | string                            | No       |           |
+| message         | string                            | No       |           |
+| options         | { text, onPress, destructable }   | Yes      |           |
+|   .text         | string                            | Yes      |           |
+|   .onPress      | () => void                        | No       |           |
+|   .destructable | boolean                           | No       | false     |
+| cancel          | false OR { text, onPress }        | Yes      |           |
+|   .text         | string                            | No       | 'Cancel'  |
+|   .onPress      | () => void                        | No       |           |
+| tintColor       | string (eg. '#0088FF')            | No       |           |
+| anchor (iOS)    | number                            | No       |           |
+
+### Simple
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
@@ -58,7 +75,7 @@ ActionSheet.options({
 })
 ```
 
-**Additional Options**
+### Additional Options
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
@@ -74,7 +91,7 @@ ActionSheet.options({
 })
 ```
 
-**Non Cancelable**
+### Disable Cancel
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
@@ -87,25 +104,14 @@ ActionSheet.options({
 })
 ```
 
-| Name            | Type                              | Required | Default   |
-| ----------------| ----------------------------------| -------- | --------- |
-| title           | string                            | No       |           |
-| message         | string                            | No       |           |
-| options         | { text, onPress, destructable }   | Yes      |           |
-| ⠀⠀.text         | string                            | Yes      |           |
-| ⠀⠀.onPress      | () => void                        | No       |           |
-| ⠀⠀.destructable | boolean                           | No       | false     |
-| cancel          | false OR { text, onPress }        | Yes      |           |
-| ⠀⠀.text         | string                            | No       | 'Cancel'  |
-| ⠀⠀.onPress      | () => void                        | No       |           |
-| tintColor       | string (eg. '#0088FF')            | No       |           |
-| anchor (iOS)    | number                            | No       |           |
 
-### showActionSheetWithOptions
+## ActionSheet.showActionSheetWithOptions
 
-However if you do not wish to stick with the traditional API, you can call `ActionSheet.showActionSheetWithOptions`, which uses the exact same API as `ActionSheetIOS`.
+If you wish to stick with the traditional API, you can call `ActionSheet.showActionSheetWithOptions`, which uses the exact same API as [ActionSheetIOS](https://reactnative.dev/docs/actionsheetios).
 
-**Simple**
+`anchor` is only used for iOS.
+
+### Simple
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.showActionSheetWithOptions(
@@ -118,7 +124,7 @@ ActionSheet.showActionSheetWithOptions(
 )
 ```
 
-**Additional Options**
+### Additional Options
 ```typescript
 import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.showActionSheetWithOptions(
@@ -136,9 +142,9 @@ ActionSheet.showActionSheetWithOptions(
 )
 ```
 
-## Only use ActionSheetAndroid
+# Only require usage of ActionSheetAndroid
 
-If you only wish to import `ActionSheetAndroid` as you wish to handle ActionSheets differently for different platforms, you can handle it by only importing it directly:
+If you only wish to import `ActionSheetAndroid` as you wish to handle ActionSheets differently for different platforms, then you may import it directly:
 
 ```typescript
 import { ActionSheetAndroid } from 'react-native-cross-actionsheet'
@@ -148,7 +154,7 @@ ActionSheetAndroid.showActionSheetWithOptions({
 })
 ```
 
-## Why Native?
+# Why Native?
 
 You may be wondering, why do you need a native implementation when the JS implementation can also do the same job?
 

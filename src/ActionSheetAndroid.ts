@@ -1,5 +1,5 @@
-import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
-import {Platform} from "react-native";
+import { ActionSheetAndroidModule } from './ActionSheetAndroidModule'
+import { Platform } from 'react-native'
 
 export interface ActionSheetAndroidOptions {
   title?: string
@@ -15,7 +15,11 @@ export const ActionSheetAndroid = new (class {
     if (Platform.OS === 'android') {
       const optionsWithoutCancel = options.options.filter((it, index) => index !== options.cancelButtonIndex)
       let destructiveButtonIndex = options.destructiveButtonIndex ?? -1
-      if (destructiveButtonIndex != null && options.cancelButtonIndex != null && destructiveButtonIndex > options.cancelButtonIndex) {
+      if (
+        destructiveButtonIndex != null &&
+        options.cancelButtonIndex != null &&
+        destructiveButtonIndex > options.cancelButtonIndex
+      ) {
         destructiveButtonIndex = destructiveButtonIndex - 1
       }
       ActionSheetAndroidModule.options(
@@ -25,7 +29,7 @@ export const ActionSheetAndroid = new (class {
         optionsWithoutCancel,
         destructiveButtonIndex,
         options.tintColor ?? '#222222'
-      ).then(index => {
+      ).then((index) => {
         if (options.cancelButtonIndex != null) {
           if (index === -1) {
             callback(options.cancelButtonIndex)

@@ -1,15 +1,15 @@
-import { ActionSheetIOSOptions } from "react-native";
+import { ActionSheetIOSOptions } from 'react-native';
 export interface ActionSheetOptions {
     title?: string;
     message?: string;
     options: {
         destructive?: boolean;
         text: string;
-        onPress: () => (void | Promise<void>);
+        onPress: () => void | Promise<void>;
     }[];
     cancel?: {
         text?: string;
-        onPress?: () => (void | Promise<void>);
+        onPress?: () => void | Promise<void>;
     } | false;
     tintColor?: string;
     anchor?: number;

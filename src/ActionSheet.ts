@@ -1,21 +1,23 @@
-import { ActionSheetIOS, ActionSheetIOSOptions, Platform } from "react-native";
-import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
-import { ActionSheetAndroid } from "./ActionSheetAndroid";
-import { ActionSheetCancelledError } from "./ActionSheetCancelledError";
+import { ActionSheetIOS, ActionSheetIOSOptions, Platform } from 'react-native'
+import { ActionSheetAndroidModule } from './ActionSheetAndroidModule'
+import { ActionSheetAndroid } from './ActionSheetAndroid'
+import { ActionSheetCancelledError } from './ActionSheetCancelledError'
 
 export interface ActionSheetOptions {
-  title?: string,
+  title?: string
   message?: string
   options: {
-    destructive?: boolean,
+    destructive?: boolean
     text: string
-    onPress: () => (void | Promise<void>)
-  }[],
-  cancel?: {
-    text?: string
-    onPress?: () => (void | Promise<void>)
-  } | false
-  tintColor?: string,
+    onPress: () => void | Promise<void>
+  }[]
+  cancel?:
+    | {
+        text?: string
+        onPress?: () => void | Promise<void>
+      }
+    | false
+  tintColor?: string
   anchor?: number
 }
 
@@ -23,10 +25,10 @@ async function androidOptions(opt: ActionSheetOptions) {
   const index = await ActionSheetAndroidModule.options(
     opt.title ?? null,
     opt.message ?? null,
-    opt.cancel === false ? null : (opt.cancel?.text ? opt.cancel.text : 'Cancel'),
-    opt.options.map(it=>it.text),
-    opt.options.findIndex(it=>it.destructive),
-    opt.tintColor ?? '#222222',
+    opt.cancel === false ? null : opt.cancel?.text ? opt.cancel.text : 'Cancel',
+    opt.options.map((it) => it.text),
+    opt.options.findIndex((it) => it.destructive),
+    opt.tintColor ?? '#222222'
   )
   if (index === -1) {
     if (opt.cancel && opt.cancel.onPress) {
@@ -40,18 +42,18 @@ async function androidOptions(opt: ActionSheetOptions) {
 }
 
 async function iosOptions(opt: ActionSheetOptions) {
-  const options = opt.options.map<string>(it => it.text)
-  const cancel = opt.cancel === false ? null : (opt.cancel?.text ? opt.cancel.text : 'Cancel')
+  const options = opt.options.map<string>((it) => it.text)
+  const cancel = opt.cancel === false ? null : opt.cancel?.text ? opt.cancel.text : 'Cancel'
   return new Promise((res, rej) => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
         title: opt.title,
         message: opt.message,
         options: cancel ? [...options, cancel] : options,
-        destructiveButtonIndex: opt.options.findIndex(it => it.destructive),
+        destructiveButtonIndex: opt.options.findIndex((it) => it.destructive),
         cancelButtonIndex: cancel ? options.length : undefined,
         tintColor: opt.tintColor,
-        anchor: opt.anchor
+        anchor: opt.anchor,
       },
       async (buttonIndex: number) => {
         if (cancel && buttonIndex === options.length) {
@@ -69,14 +71,13 @@ async function iosOptions(opt: ActionSheetOptions) {
 }
 
 export const ActionSheet = new (class {
-
-  showActionSheetWithOptions(options: ActionSheetIOSOptions, callback: (buttonIndex: number)=>void) {
+  showActionSheetWithOptions(options: ActionSheetIOSOptions, callback: (buttonIndex: number) => void) {
     if (Platform.OS === 'android') {
       ActionSheetAndroid.showActionSheetWithOptions(options, callback)
     } else if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(options, callback)
     } else {
-      throw Error("Unsupported OS. Only Android or iOS is allowed")
+      throw Error('Unsupported OS. Only Android or iOS is allowed')
     }
   }
 
@@ -86,7 +87,7 @@ export const ActionSheet = new (class {
     } else if (Platform.OS === 'ios') {
       await iosOptions(opt)
     } else {
-      throw Error("Unsupported OS. Only Android or iOS is allowed")
+      throw Error('Unsupported OS. Only Android or iOS is allowed')
     }
   }
-})
+})()
