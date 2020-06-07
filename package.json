@@ -1,16 +1,15 @@
 {
-  "name": "react-native-android-sheet",
-  "title": "React Native Action Sheet Android",
-  "version": "0.0.1",
-  "description": "TODO",
+  "name": "react-native-cross-actionsheet",
+  "title": "Cross Platform Actionsheets with Native Android implementation",
+  "version": "0.0.12",
+  "description": "Simple to use, cross platform ActionSheets using Native Android ActionSheets and ActionSheetIOS",
   "main": "index.js",
-  "files": [
-    "README.md",
-    "android",
-    "index.js",
-    "index.d.ts"
-  ],
-  "scripts": {},
+  "scripts": {
+    "prepublish": "tsc",
+    "compile": "tsc --noEmit",
+    "build_android": "cd android && gradle build",
+    "lint_fix": "eslint . --ext .ts,.tsx --fix"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/github_account/react-native-action-sheet-android.git",
@@ -18,8 +17,12 @@
   },
   "keywords": [
     "react-native",
-    "action sheet",
-    "android"
+    "action",
+    "sheet",
+    "cross platform",
+    "android",
+    "native",
+    "BottomSheetDialog"
   ],
   "author": {
     "name": "aelesia",
@@ -35,6 +38,9 @@
   "devDependencies": {
     "react": "^16.9.0",
     "react-native": "^0.61.5",
-    "typescript": "^3.9.5"
-  },
+    "@types/react-native": "^0.62.13",
+    "typescript": "^3.9.5",
+    "eslint": "^7.1.0",
+    "@react-native-community/eslint-config": "^1.0.0"
+  }
 }

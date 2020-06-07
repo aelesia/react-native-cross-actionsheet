@@ -35,7 +35,7 @@ public class ActionSheetListAdapter extends ArrayAdapter<String>
         TextView text = (TextView) rowView.findViewById(R.id.actionsheet_item_text);
         text.setText(getItem(position));
         if (destructive == position) {
-            text.setTextColor(Color.parseColor("#FF0000"));
+            text.setTextColor(Color.parseColor("#ff3b3a"));
         } else {
             try {
                 text.setTextColor(Color.parseColor(tintColor));

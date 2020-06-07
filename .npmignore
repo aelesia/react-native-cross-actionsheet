@@ -1,0 +1,13 @@
+index.ts
+package-lock.json
+tsconfig.json
+yarn.lock
+yarn-error.log
+
+.idea/
+android/.idea/
+android/build/
+android/.gradle/
+android/gradle/
+*.ts
+!*.d.ts

@@ -1,0 +1,65 @@
+name: Build
+on:
+  push:
+    branches:
+      - 'master'
+      - 'develop'
+      - 'feature/**'
+      - 'release/**'
+      - 'hotfix/**'
+      - 'ci/**'
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Cache node_modules
+        id: cache_node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - run: yarn run compile
+
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+  publish:
+    if: contains(github.ref, 'refs/heads/master')
+    needs: [compile, build_android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node_modules
+        id: cache_node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public
+
+      - run: echo ::set-env name=VERSION_NAME::$(npx @siliconjungles/rn-scripts get_version_name)
+
+      - run: |
+          npx @siliconjungles/rn-scripts commit_tag "
+            tag=${{env.VERSION_NAME}}
+            repo=https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git
+            message=${{env.VERSION_NAME}}"
