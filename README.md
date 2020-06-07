@@ -25,13 +25,9 @@ ActionSheet.options({
 
 ## Preview
 
-**Android**
-
-<img src="https://i.imgur.com/HSPgkCw.gif"/>
-
-**iOS (uses ActionSheetIOS)**
-
-<img src="https://i.imgur.com/XJ6rgw5.gif"/>
+| Android                                      | iOS                                          |
+|----------------------------------------------|----------------------------------------------|
+| <img src="https://i.imgur.com/HSPgkCw.gif"/> | <img src="https://i.imgur.com/XJ6rgw5.gif"/> |
 
 # Features
 
