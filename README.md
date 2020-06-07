@@ -1,8 +1,13 @@
 # react-native-cross-actionsheet
 
-Simple to use, cross platform ActionSheets using **Native** Android ActionSheets and ActionSheetIOS.
+Simple to use, static API, cross platform ActionSheets using **Native** Android ActionSheets and ActionSheetIOS.
 
-As it uses Native components, it can be called statically, and no JSX components or show/hide state management are required. Just import the library and you're good to go.
+- Native Android ActionSheets
+- Simple API that can be statically called (no JSX components)
+- Feature parity with iOS
+- Modern sleek UI
+- Typescript support
+- Async support
 
 ## Quickstart
 
@@ -28,15 +33,6 @@ ActionSheet.options({
 | Android                                      | iOS                                          |
 |----------------------------------------------|----------------------------------------------|
 | <img src="https://i.imgur.com/HSPgkCw.gif"/> | <img src="https://i.imgur.com/XJ6rgw5.gif"/> |
-
-# Features
-
-- Native Android ActionSheets
-- Feature parity with iOS
-- Modern sleek UI
-- Static calling, no JSX components required
-- Typescript support
-- Async support
 
 # Usage
 

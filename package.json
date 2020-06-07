@@ -1,8 +1,8 @@
 {
   "name": "react-native-cross-actionsheet",
-  "title": "Cross Platform Actionsheets with Native Android implementation",
+  "title": "Cross Platform Actionsheets backed by Native Android implementation",
   "version": "0.0.12",
-  "description": "Simple to use, cross platform ActionSheets using Native Android ActionSheets and ActionSheetIOS",
+  "description": "Simple to use, static API, cross platform ActionSheets using Native Android ActionSheets and ActionSheetIOS",
   "main": "index.js",
   "scripts": {
     "prepublish": "tsc",
@@ -10,11 +10,7 @@
     "build_android": "cd android && gradle build",
     "lint_fix": "eslint . --ext .ts,.tsx --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/github_account/react-native-action-sheet-android.git",
-    "baseUrl": "https://github.com/github_account/react-native-action-sheet-android"
-  },
+  "repository": "https://github.com/aelesia/react-native-cross-actionsheet",
   "keywords": [
     "react-native",
     "action",
