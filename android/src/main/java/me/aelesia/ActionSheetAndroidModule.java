@@ -88,8 +88,8 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
                     cancelText.setTextColor(Color.parseColor("#222222"));
                 }
                 cancelText.setText(cancel);
-                cancelText.setVisibility(View.VISIBLE);
                 LinearLayout cancelView = (LinearLayout) dialog.findViewById(R.id.actionsheet_cancel_view);
+                cancelView.setVisibility(View.VISIBLE);
                 cancelView.setOnClickListener(v -> {
                     dialog.dismiss();
                     isShowingDialog = false;

@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp"
+        android:visibility="gone"
         >
         <TextView
             android:textSize="20sp"
@@ -67,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:visibility="gone"
             />
     </LinearLayout>
 </LinearLayout>
