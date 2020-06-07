@@ -1,4 +1,4 @@
-import { ActionSheetAndroidModule } from "src/ActionSheetAndroidModule";
+import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
 import {Platform} from "react-native";
 
 export interface ActionSheetAndroidOptions {

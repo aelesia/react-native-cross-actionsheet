@@ -21,7 +21,7 @@ import java.util.List;
 public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
-    private isShowingDialog = false
+    private boolean isShowingDialog = false;
 
     public ActionSheetAndroidModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -35,7 +35,7 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void options(String title, String message, String cancel, ReadableArray option, int destructiveIndex, String tintColor, Promise promise) {
-        if (isShowingDialog == true) {
+        if (!isShowingDialog) {
             List<Object> messageStrList = option.toArrayList();
             List<String> strList = new ArrayList<String>();
 
@@ -68,13 +68,14 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
 
 
             dialog.setOnCancelListener(dialog1 -> {
+                isShowingDialog = false;
                 promise.resolve(-1);
             });
 
             ListView listView = dialog.findViewById(R.id.actionsheet_list);
             ActionSheetListAdapter adapter = new ActionSheetListAdapter(reactContext, strList, destructiveIndex, tintColor, position -> {
                 dialog.dismiss();
-                isShowingDialog = false
+                isShowingDialog = false;
                 promise.resolve(position);
             });
             listView.setAdapter(adapter);
@@ -91,12 +92,12 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
                 LinearLayout cancelView = (LinearLayout) dialog.findViewById(R.id.actionsheet_cancel_view);
                 cancelView.setOnClickListener(v -> {
                     dialog.dismiss();
-                    isShowingDialog = false
+                    isShowingDialog = false;
                     promise.resolve(-1);
                 });
             }
 
-            isShowingDialog = true
+            isShowingDialog = true;
             dialog.show();
         }
     }

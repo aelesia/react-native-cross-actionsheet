@@ -1,15 +1,9 @@
 {
   "name": "react-native-android-sheet",
   "title": "Cross Platform Actionsheets with Native Android implementation",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "Cross Platform ActionSheets. Uses a Native Android implementation and ActionSheetIOS",
   "main": "index.js",
-  "files": [
-    "README.md",
-    "android",
-    "index.js",
-    "index.d.ts"
-  ],
   "scripts": {
     "prepublish": "tsc",
     "compile": "tsc"
@@ -23,6 +17,7 @@
     "react-native",
     "action sheet",
     "android",
+    "native",
     "BottomSheetDialog"
   ],
   "author": {

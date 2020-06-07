@@ -8,14 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { ActionSheetIOS, Platform } from "react-native";
-import { ActionSheetAndroidModule } from "src/ActionSheetAndroidModule";
-import { ActionSheetAndroid } from "src/ActionSheetAndroid";
-import { ActionSheetCancelled } from "src/ActionSheetCancelled";
+import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
+import { ActionSheetAndroid } from "./ActionSheetAndroid";
+import { ActionSheetCancelled } from "./ActionSheetCancelled";
 function androidOptions(opt) {
     var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function* () {
         const { options } = opt;
-        const index = yield ActionSheetAndroidModule.options((_a = opt.title, (_a !== null && _a !== void 0 ? _a : null)), (_b = opt.message, (_b !== null && _b !== void 0 ? _b : null)), (_d = (_c = opt.cancel) === null || _c === void 0 ? void 0 : _c.text, (_d !== null && _d !== void 0 ? _d : 'Cancel')), opt.options.map(it => it.text), opt.options.findIndex(it => it.destructive), opt.tintColor);
+        const index = yield ActionSheetAndroidModule.options((_a = opt.title) !== null && _a !== void 0 ? _a : null, (_b = opt.message) !== null && _b !== void 0 ? _b : null, (_d = (_c = opt.cancel) === null || _c === void 0 ? void 0 : _c.text) !== null && _d !== void 0 ? _d : 'Cancel', opt.options.map(it => it.text), opt.options.findIndex(it => it.destructive), opt.tintColor);
         if (index === -1) {
             if (opt.cancel) {
                 yield ((_e = opt.cancel) === null || _e === void 0 ? void 0 : _e.onPress());

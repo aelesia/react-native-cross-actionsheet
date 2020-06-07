@@ -1,7 +1,7 @@
-import {ActionSheetIOS, ActionSheetIOSOptions, Platform} from "react-native";
-import {ActionSheetAndroidModule} from "src/ActionSheetAndroidModule";
-import {ActionSheetAndroid} from "src/ActionSheetAndroid";
-import {ActionSheetCancelled} from "src/ActionSheetCancelled";
+import { ActionSheetIOS, ActionSheetIOSOptions, Platform } from "react-native";
+import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
+import { ActionSheetAndroid } from "./ActionSheetAndroid";
+import { ActionSheetCancelled } from "./ActionSheetCancelled";
 
 export interface ActionSheetOptions {
   title?: string,

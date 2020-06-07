@@ -4,4 +4,7 @@ tsconfig.json
 yarn.lock
 yarn-error.log
 
+.idea/
 android/.idea/
+android/build/
+*.ts
