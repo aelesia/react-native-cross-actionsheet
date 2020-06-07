@@ -1,4 +1,4 @@
-# react-native-cross-actionsheets
+# react-native-cross-actionsheet
 
 Simple to use, cross platform ActionSheets using **Native** Android ActionSheets and ActionSheetIOS.
 
@@ -15,12 +15,12 @@ As it uses Native components, it can be called statically, and no JSX components
 
 ## Quickstart
 
-yarn: `yarn add react-native-cross-actionsheets`
+yarn: `yarn add react-native-cross-actionsheet`
 
-npm: `npm install react-native-cross-actionsheets`
+npm: `npm install react-native-cross-actionsheet`
 
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 
 ActionSheet.options({
   options: [
@@ -47,7 +47,7 @@ It's recommended to use the `ActionSheet.options` API as it is cleaner, more str
 
 **Simple**
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
   options: [
     { text: 'Create', onPress: () => console.log('create') },
@@ -60,7 +60,7 @@ ActionSheet.options({
 
 **Additional Options**
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
     title: 'ActionSheet Title',
     message: 'Select an option',
@@ -76,7 +76,7 @@ ActionSheet.options({
 
 **Non Cancelable**
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.options({
     options: [
       { text: 'Create', onPress: () => console.log('create') },
@@ -107,7 +107,7 @@ However if you do not wish to stick with the traditional API, you can call `Acti
 
 **Simple**
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.showActionSheetWithOptions(
   { 
     options: ['Create', 'Edit', 'Delete', 'Cancel'] 
@@ -120,7 +120,7 @@ ActionSheet.showActionSheetWithOptions(
 
 **Additional Options**
 ```typescript
-import { ActionSheet } from 'react-native-android-sheet'
+import { ActionSheet } from 'react-native-cross-actionsheet'
 ActionSheet.showActionSheetWithOptions(
   {
     title: 'Action Sheet',
@@ -141,7 +141,7 @@ ActionSheet.showActionSheetWithOptions(
 If you only wish to import `ActionSheetAndroid` as you wish to handle ActionSheets differently for different platforms, you can handle it by only importing it directly:
 
 ```typescript
-import { ActionSheetAndroid } from 'react-native-android-sheet'
+import { ActionSheetAndroid } from 'react-native-cross-actionsheet'
 
 ActionSheetAndroid.showActionSheetWithOptions({
 ... // same as AndroidSheetIOS
