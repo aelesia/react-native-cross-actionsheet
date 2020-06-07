@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    android:id="@+id/fragment_history_menu_bottom"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/dialog_rounded_background"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:id="@+id/actionsheet_header"
-        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:id="@+id/fragment_history_menu_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="vertical"
+        android:background="@drawable/dialog_rounded_background"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+            android:id="@+id/actionsheet_header"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    >
         <TextView
             android:textColor="#666"
             android:textStyle="bold"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:visibility="gone"
-            />
+        />
         <TextView
             android:textColor="#666"
             android:id="@+id/actionsheet_message"
@@ -30,13 +30,13 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:visibility="gone"
-            />
-    </LinearLayout>
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#DDD"
         />
+    </LinearLayout>
+<!--    <View-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="#DDD"-->
+<!--    />-->
     <ListView
         android:id="@+id/actionsheet_list"
         android:layout_height="wrap_content"
@@ -44,12 +44,14 @@
         android:divider="#DDD"
         android:dividerHeight="1dp"
         android:headerDividersEnabled="true"
-        />
-    <View
-        android:layout_height="6dp"
-        android:layout_width="match_parent"
-        android:background="#DDD"
-        />
+    />
+<!--    <View-->
+<!--        android:layout_height="6dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="#DDD"-->
+<!--        android:id="@+id/actionsheet_cancel_border"-->
+<!--        android:visibility="gone"-->
+<!--    />-->
     <LinearLayout
         android:id="@+id/actionsheet_cancel_view"
         android:clickable="true"
@@ -60,7 +62,7 @@
         android:orientation="horizontal"
         android:padding="12dp"
         android:visibility="gone"
-        >
+    >
         <TextView
             android:textSize="20sp"
             android:textStyle="bold"
@@ -68,6 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            />
+        />
     </LinearLayout>
 </LinearLayout>

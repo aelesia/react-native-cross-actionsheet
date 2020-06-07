@@ -3,6 +3,7 @@ package me.aelesia;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,13 +67,22 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
                 }
             }
 
-
-            dialog.setOnCancelListener(dialog1 -> {
-                isShowingDialog = false;
-                promise.resolve(-1);
-            });
+            if (cancel == null) {
+                dialog.setCancelable(false);
+            } else {
+                dialog.setOnCancelListener(dialog1 -> {
+                    isShowingDialog = false;
+                    promise.resolve(-1);
+                });
+            }
 
             ListView listView = dialog.findViewById(R.id.actionsheet_list);
+            if (title != null || message != null) {
+                View border = new View(reactContext);
+                border.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                border.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+                listView.addHeaderView(border);
+            }
             ActionSheetListAdapter adapter = new ActionSheetListAdapter(reactContext, strList, destructiveIndex, tintColor, position -> {
                 dialog.dismiss();
                 isShowingDialog = false;
@@ -81,6 +91,12 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
             listView.setAdapter(adapter);
 
             if (cancel != null) {
+                View border = new View(reactContext);
+                border.setBackgroundColor(Color.parseColor("#DDDDDD"));
+                border.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 6));
+                listView.addFooterView(border);
+
+                dialog.findViewById(R.id.actionsheet_list);
                 TextView cancelText = dialog.findViewById(R.id.actionsheet_cancel);
                 try {
                     cancelText.setTextColor(Color.parseColor(tintColor));
@@ -88,7 +104,7 @@ public class ActionSheetAndroidModule extends ReactContextBaseJavaModule {
                     cancelText.setTextColor(Color.parseColor("#222222"));
                 }
                 cancelText.setText(cancel);
-                LinearLayout cancelView = (LinearLayout) dialog.findViewById(R.id.actionsheet_cancel_view);
+                LinearLayout cancelView = dialog.findViewById(R.id.actionsheet_cancel_view);
                 cancelView.setVisibility(View.VISIBLE);
                 cancelView.setOnClickListener(v -> {
                     dialog.dismiss();

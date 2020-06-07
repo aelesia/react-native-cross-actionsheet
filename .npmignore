@@ -7,4 +7,6 @@ yarn-error.log
 .idea/
 android/.idea/
 android/build/
+android/.gradle/
+android/gradle/
 *.ts
