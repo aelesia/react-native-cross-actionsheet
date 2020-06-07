@@ -1,7 +1,7 @@
 import { ActionSheetIOS, ActionSheetIOSOptions, Platform } from "react-native";
 import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
 import { ActionSheetAndroid } from "./ActionSheetAndroid";
-import { ActionSheetCancelled } from "./ActionSheetCancelled";
+import { ActionSheetCancelledError } from "./ActionSheetCancelledError";
 
 export interface ActionSheetOptions {
   title?: string,
@@ -32,7 +32,7 @@ async function androidOptions(opt: ActionSheetOptions) {
     if (opt.cancel && opt.cancel.onPress) {
       await opt.cancel?.onPress()
     } else {
-      throw new ActionSheetCancelled()
+      throw new ActionSheetCancelledError()
     }
   } else {
     await opt.options[index].onPress()
@@ -58,7 +58,7 @@ async function iosOptions(opt: ActionSheetOptions) {
           if (opt.cancel && opt.cancel.onPress) {
             res(await opt.cancel?.onPress())
           } else {
-            rej(new ActionSheetCancelled())
+            rej(new ActionSheetCancelledError())
           }
         } else {
           res(opt.options[buttonIndex].onPress())

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { ActionSheetIOS, Platform } from "react-native";
 import { ActionSheetAndroidModule } from "./ActionSheetAndroidModule";
 import { ActionSheetAndroid } from "./ActionSheetAndroid";
-import { ActionSheetCancelled } from "./ActionSheetCancelled";
+import { ActionSheetCancelledError } from "./ActionSheetCancelledError";
 function androidOptions(opt) {
     var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function* () {
@@ -20,7 +20,7 @@ function androidOptions(opt) {
                 yield ((_e = opt.cancel) === null || _e === void 0 ? void 0 : _e.onPress());
             }
             else {
-                throw new ActionSheetCancelled();
+                throw new ActionSheetCancelledError();
             }
         }
         else {
@@ -49,7 +49,7 @@ function iosOptions(opt) {
                         res(yield ((_a = opt.cancel) === null || _a === void 0 ? void 0 : _a.onPress()));
                     }
                     else {
-                        rej(new ActionSheetCancelled());
+                        rej(new ActionSheetCancelledError());
                     }
                 }
                 else {
