@@ -1,0 +1,7 @@
+index.ts
+package-lock.json
+tsconfig.json
+yarn.lock
+yarn-error.log
+
+android/.idea/

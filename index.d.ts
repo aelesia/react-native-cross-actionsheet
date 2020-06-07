@@ -1,11 +1,2 @@
-export interface ActionSheetAndroidOptions {
-    title?: string;
-    message?: string;
-    options: string[];
-    cancelButtonIndex?: number;
-    destructiveButtonIndex?: number;
-    tintColor?: string;
-}
-export declare const AndroidActionSheet: {
-    showActionSheetWithOptions(options: ActionSheetAndroidOptions, callback: (buttonIndex: number) => void): void;
-};
+export { ActionSheet, ActionSheetOptions } from './src/ActionSheet';
+export { ActionSheetAndroid, ActionSheetAndroidOptions } from './src/ActionSheetAndroid';

@@ -18,6 +18,44 @@ export interface ActionSheetOptions {
   tintColor: string
 }
 
+
+async function androidOptions(opt: ActionSheetOptions) {
+  const {options} = opt
+  const index = await ActionSheetAndroidModule.options(
+    opt.title ?? null,
+    opt.message ?? null,
+    opt.cancel?.text ?? 'Cancel',
+    opt.options.map(it=>it.text),
+    opt.options.findIndex(it=>it.destructive),
+    opt.tintColor
+  )
+  if (index === -1) {
+    if (opt.cancel) {
+      await opt.cancel?.onPress()
+    } else {
+      throw new ActionSheetCancelled()
+    }
+  } else {
+    await opt.options[index].onPress()
+  }
+}
+
+async function iosOptions(opt: ActionSheetOptions) {
+  const {options} = opt
+  await ActionSheetIOS.showActionSheetWithOptions(
+    {
+      options: [...options.map<string>(it => it.text), 'Cancel'],
+      destructiveButtonIndex: options.findIndex(it => it.destructive),
+      cancelButtonIndex: options.length
+    },
+    (buttonIndex:number) => {
+      if (buttonIndex < options.length) {
+        options[buttonIndex].onPress()
+      }
+    }
+  )
+}
+
 export const ActionSheet = new (class {
 
   showActionSheetWithOptions(options: ActionSheetIOSOptions, callback: (buttonIndex: number)=>void) {
@@ -32,48 +70,11 @@ export const ActionSheet = new (class {
 
   async options(opt: ActionSheetOptions) {
     if (Platform.OS === 'android') {
-      await this.androidOptions(opt)
+      await androidOptions(opt)
     } else if (Platform.OS === 'ios') {
-      await this.iosOptions(opt)
+      await iosOptions(opt)
     } else {
       throw Error("Unsupported OS. Only Android or iOS is allowed")
     }
-  }
-
-  private async androidOptions(opt: ActionSheetOptions) {
-    const {options} = opt
-    const index = await ActionSheetAndroidModule.options(
-      opt.title ?? null,
-      opt.message ?? null,
-      opt.cancel?.text ?? 'Cancel',
-      opt.options.map(it=>it.text),
-      opt.options.findIndex(it=>it.destructive),
-      opt.tintColor
-    )
-    if (index === -1) {
-      if (opt.cancel) {
-        await opt.cancel?.onPress()
-      } else {
-        throw new ActionSheetCancelled()
-      }
-    } else {
-      await opt.options[index].onPress()
-    }
-  }
-
-  private async iosOptions(opt: ActionSheetOptions) {
-    const {options} = opt
-    await ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: [...options.map<string>(it => it.text), 'Cancel'],
-        destructiveButtonIndex: options.findIndex(it => it.destructive),
-        cancelButtonIndex: options.length
-      },
-      (buttonIndex:number) => {
-        if (buttonIndex < options.length) {
-          options[buttonIndex].onPress()
-        }
-      }
-    )
   }
 })
