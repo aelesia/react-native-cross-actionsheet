@@ -1,17 +1,27 @@
-# react-native-action-sheet-android
+# react-native-cross-actionsheets
 
-## Getting started
+Cross platform ActionSheets using ActionSheetIOS and **Native** Android ActionSheets.
 
-`$ npm install react-native-action-sheet-android --save`
+Created this library because there weren't many good cross platform ActionSheet libraries. Most libraries out there use JS implementations instead of native implementations. The few that do have native implementations have dated looking UIs.
 
-### Mostly automatic installation
+## Preview
 
-`$ react-native link react-native-action-sheet-android`
+Android
+
+iOS (uses ActionSheetIOS)
 
 ## Usage
-```javascript
-import ActionSheetAndroid from 'react-native-action-sheet-android';
 
-// TODO: What to do with the module?
-ActionSheetAndroid;
-```
+You can use the async `ActionSheet.options` syntax. It is a cleaner and more straightforward API.
+
+However if you do not wish to use a different API, you can call `ActionSheet.showActionSheetWithOptions`, which uses the exact same API as `ActionSheetIOS`.
+
+## Only use ActionSheetAndroid
+
+If you only wish to import `ActionSheetAndroid` as you wish to handle ActionSheets differently for different platforms, you can handle it
+
+## Why?
+
+You may be wondering, what's the difference being a native implementation and a JS implementation?
+
+For JS, it is rendered at the same level as your Modal.

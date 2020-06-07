@@ -1,7 +1,7 @@
 {
   "name": "react-native-android-sheet",
   "title": "React Native Action Sheet Android",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Native Action Sheets for Android using BottomSheetDialog",
   "main": "index.js",
   "files": [
@@ -39,6 +39,7 @@
   "devDependencies": {
     "react": "^16.9.0",
     "react-native": "^0.61.5",
+    "@types/react-native": "^0.62.13",
     "typescript": "^3.9.5"
-  }
+  },
 }
