@@ -10,3 +10,4 @@ android/build/
 android/.gradle/
 android/gradle/
 *.ts
+!*.d.ts
