@@ -3,14 +3,16 @@ import { ActionSheetAndroidModule } from './ActionSheetAndroidModule'
 import { ActionSheetAndroid } from './ActionSheetAndroid'
 import { ActionSheetCancelledError } from './ActionSheetCancelledError'
 
-export interface ActionSheetOptions {
+export type ActionSheetOption = {
+  destructive?: boolean
+  text: string
+  onPress: () => void | Promise<void>
+}
+
+export type ActionSheetConfig = {
   title?: string
   message?: string
-  options: {
-    destructive?: boolean
-    text: string
-    onPress: () => void | Promise<void>
-  }[]
+  options: ActionSheetOption[]
   cancel?:
     {
       text?: string
@@ -21,49 +23,47 @@ export interface ActionSheetOptions {
   anchor?: number
 }
 
-async function androidOptions(opt: ActionSheetOptions) {
+async function androidOptions(cfg: ActionSheetConfig) {
   const index = await ActionSheetAndroidModule.options(
-    opt.title ?? null,
-    opt.message ?? null,
-    opt.cancel === false ? null : opt.cancel?.text ? opt.cancel.text : 'Cancel',
-    opt.options.map((it) => it.text),
-    opt.options.findIndex((it) => it.destructive),
-    opt.tintColor ?? '#222222'
+    cfg.title ?? null,
+    cfg.message ?? null,
+    cfg.cancel === false ? null : cfg.cancel?.text ? cfg.cancel.text : 'Cancel',
+    cfg.options.map((it) => it.text),
+    cfg.options.findIndex((it) => it.destructive),
+    cfg.tintColor ?? '#222222'
   )
   if (index === -1) {
-    if (opt.cancel && opt.cancel.onPress) {
-      await opt.cancel?.onPress()
-    } else {
-      throw new ActionSheetCancelledError()
+    if (cfg.cancel && cfg.cancel.onPress) {
+      await cfg.cancel?.onPress()
     }
   } else {
-    await opt.options[index].onPress()
+    await cfg.options[index].onPress()
   }
 }
 
-async function iosOptions(opt: ActionSheetOptions) {
-  const options = opt.options.map<string>((it) => it.text)
-  const cancel = opt.cancel === false ? null : opt.cancel?.text ? opt.cancel.text : 'Cancel'
-  return new Promise((res, rej) => {
+async function iosOptions(cfg: ActionSheetConfig) {
+  const options = cfg.options.map<string>((it) => it.text)
+  const cancel = cfg.cancel === false ? null : cfg.cancel?.text ? cfg.cancel.text : 'Cancel'
+  return new Promise((res) => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        title: opt.title,
-        message: opt.message,
+        title: cfg.title,
+        message: cfg.message,
         options: cancel ? [...options, cancel] : options,
-        destructiveButtonIndex: opt.options.findIndex((it) => it.destructive),
+        destructiveButtonIndex: cfg.options.findIndex((it) => it.destructive),
         cancelButtonIndex: cancel ? options.length : undefined,
-        tintColor: opt.tintColor,
-        anchor: opt.anchor,
+        tintColor: cfg.tintColor,
+        anchor: cfg.anchor
       },
       async (buttonIndex: number) => {
         if (cancel && buttonIndex === options.length) {
-          if (opt.cancel && opt.cancel.onPress) {
-            res(await opt.cancel?.onPress())
+          if (cfg.cancel && cfg.cancel.onPress) {
+            res(await cfg.cancel?.onPress())
           } else {
-            rej(new ActionSheetCancelledError())
+            res()
           }
         } else {
-          res(opt.options[buttonIndex].onPress())
+          res(cfg.options[buttonIndex].onPress())
         }
       }
     )
@@ -81,13 +81,20 @@ export const ActionSheet = new (class {
     }
   }
 
-  async options(opt: ActionSheetOptions) {
+  async options(options: ActionSheetOption[] | ActionSheetConfig, config?: Omit<ActionSheetConfig, 'options'>) {
+    let opt: ActionSheetConfig
+    if (Array.isArray(options)) {
+      opt = { ...{ options }, ...config }
+    } else {
+      opt = options
+    }
+
     if (Platform.OS === 'android') {
       await androidOptions(opt)
     } else if (Platform.OS === 'ios') {
       await iosOptions(opt)
     } else {
-      throw Error('Unsupported OS. Only Android or iOS is allowed')
+      throw Error(`Unsupported OS: ${Platform.OS}. Only Android or iOS is allowed`)
     }
   }
 })()

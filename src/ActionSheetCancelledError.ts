@@ -1,3 +1,6 @@
+/**
+ * @deprecated - ActionSheet no longer throws. If you wish to throw on Cancel, pass in { cancel: {onPress()=>throw Error} }
+ */
 export class ActionSheetCancelledError extends Error {
   constructor() {
     super(

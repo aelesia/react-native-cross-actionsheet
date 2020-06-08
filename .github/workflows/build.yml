@@ -7,6 +7,7 @@ on:
       - 'feature/**'
       - 'release/**'
       - 'hotfix/**'
+      - 'npm/develop'
       - 'ci/**'
 
 jobs:
@@ -63,3 +64,26 @@ jobs:
             tag=${{env.VERSION_NAME}}
             repo=https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git
             message=${{env.VERSION_NAME}}"
+
+  publish_develop:
+    if: contains(github.ref, 'refs/heads/npm')
+    needs: [compile, build_android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node_modules
+        id: cache_node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public --tag develop
+
