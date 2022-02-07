@@ -60,7 +60,7 @@ async function iosOptions(cfg: ActionSheetConfig) {
           if (cfg.cancel && cfg.cancel.onPress) {
             res(await cfg.cancel?.onPress())
           } else {
-            res()
+            res(null)
           }
         } else {
           res(cfg.options[buttonIndex].onPress())
