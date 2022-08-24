@@ -1,7 +1,7 @@
 import { ActionSheetIOS, ActionSheetIOSOptions, Platform } from 'react-native'
 import { ActionSheetAndroidModule } from './ActionSheetAndroidModule'
 import { ActionSheetAndroid } from './ActionSheetAndroid'
-import { ActionSheetCancelledError } from './ActionSheetCancelledError'
+import { ActionSheetAndroidOptions } from '../index'
 
 export type ActionSheetOption = {
   destructive?: boolean
@@ -60,7 +60,7 @@ async function iosOptions(cfg: ActionSheetConfig) {
           if (cfg.cancel && cfg.cancel.onPress) {
             res(await cfg.cancel?.onPress())
           } else {
-            res()
+            res(null)
           }
         } else {
           res(cfg.options[buttonIndex].onPress())
@@ -71,7 +71,7 @@ async function iosOptions(cfg: ActionSheetConfig) {
 }
 
 export const ActionSheet = new (class {
-  showActionSheetWithOptions(options: ActionSheetIOSOptions, callback: (buttonIndex: number) => void) {
+  showActionSheetWithOptions(options: ActionSheetAndroidOptions | ActionSheetIOSOptions , callback: (buttonIndex: number) => void) {
     if (Platform.OS === 'android') {
       ActionSheetAndroid.showActionSheetWithOptions(options, callback)
     } else if (Platform.OS === 'ios') {
